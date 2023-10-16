@@ -19,8 +19,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<recyclerview_list> recyclerviewLists;
     private Context context;
-
     private RoomClickedListeners roomClickedListeners;
+
     public RecyclerAdapter(RoomClickedListeners roomClickedListeners)
     {
         this.roomClickedListeners = roomClickedListeners;

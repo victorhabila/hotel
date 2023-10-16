@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -25,11 +28,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecyclerAdapter.RoomClickedListeners {
 
-    private
-    ArrayList<recyclerview_list> recyclerview_lists;
+    private List<recyclerview_list> recyclerview_lists;
 
     private RecyclerAdapter roomAdapter;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private EditText searchEditText;
+    private List<recyclerview_list> filteredRoomList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +56,47 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.R
         roomAdapter = new RecyclerAdapter(this);
 
         recyclerview_lists= new ArrayList<recyclerview_list>();
+        recyclerview_lists = new ArrayList<>();
 
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Room1"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Room2"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Room3"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Room4"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Room1"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Room2"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Room3"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Room4"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Room1"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Room2"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Room3"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Room4"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Paris"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Creteil"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Massy"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Montreuil"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Versailles"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Saint-Denis"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Orleans"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Olivet"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Checy"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Nantes"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Reze"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Lyon"));
+
+        filteredRoomList = new ArrayList<>(recyclerview_lists);
+
+        recyclerView = findViewById(R.id.my_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+
+        roomAdapter = new RecyclerAdapter(this);
+        roomAdapter.setRoomItemList(filteredRoomList);
+        recyclerView.setAdapter(roomAdapter);
+
+        searchEditText = findViewById(R.id.searchEditText);
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterRooms(s.toString());
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
 
 
         roomAdapter.setRoomItemList(recyclerview_lists);
@@ -73,6 +106,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.R
 
     }
 
+
+    private void filterRooms(String query) {
+        filteredRoomList.clear();
+
+        for (recyclerview_list room : recyclerview_lists) {
+            if (room.getAd_title().toLowerCase().contains(query.toLowerCase())) {
+                filteredRoomList.add(room);
+            }
+        }
+
+        roomAdapter.setRoomItemList(filteredRoomList); // Update the adapter with filtered data
+        roomAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onCardClicked(recyclerview_list room) {
