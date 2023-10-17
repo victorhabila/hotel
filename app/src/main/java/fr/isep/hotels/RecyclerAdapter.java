@@ -36,13 +36,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CardView cardView;
         ImageView imageView;
         private TextView title;
-        //private TextView date;
+        private TextView price;
+        private TextView Location;
+
+        private TextView webURL;
+        private TextView rating;
+        private TextView desc;
+
+
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
             imageView = itemView.findViewById(R.id.imageView2);
             title = (TextView) itemView.findViewById(R.id.textView);
+            price = (TextView) itemView.findViewById(R.id.priceTextView);
+            Location = (TextView) itemView.findViewById(R.id.locationTextView);
+            webURL = (TextView) itemView.findViewById(R.id.URLTextView);
+            rating = (TextView) itemView.findViewById(R.id.RatingTextView);
+            desc = (TextView) itemView.findViewById(R.id.DescTextView);
         }
     }
 
@@ -61,6 +73,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
         itemViewHolder.imageView.setImageResource(recyclerviewLists.get(position).getPhoto_one());
         itemViewHolder.title.setText(recyclerviewLists.get(position).getAd_title());
+        itemViewHolder.price.setText(recyclerviewLists.get(position).getPrice());
+        itemViewHolder.Location.setText(recyclerviewLists.get(position).getLocation());
+        itemViewHolder.webURL.setText(recyclerviewLists.get(position).getBooking_site());
+        itemViewHolder.rating.setText(recyclerviewLists.get(position).getRating());
+        itemViewHolder.desc.setText(recyclerviewLists.get(position).getDescription());
 
 
                 itemViewHolder.cardView.setOnClickListener(new View.OnClickListener() {

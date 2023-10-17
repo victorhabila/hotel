@@ -58,18 +58,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.R
         recyclerview_lists= new ArrayList<recyclerview_list>();
         recyclerview_lists = new ArrayList<>();
 
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Paris"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Creteil"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Massy"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Montreuil"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Versailles"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Saint-Denis"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Orleans"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Olivet"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Checy"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Nantes"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Reze"));
-        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Lyon"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Single room", "www.v.com","$200", "It is a beautiful house","Paris", "⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Double room", "www.v.com","$230", "It is a beautiful house", "Lyon","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Double room","www.v.com","$200", "It is a beautiful house", "Rome", "⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Single room","www.v.com","$120", "It is a beautiful house", "Bordeaux","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Single room","www.v.com","$180", "It is a beautiful house","Dijon","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Double room","www.v.com","$300", "It is a beautiful house", "Nice","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Single room","www.v.com","$220", "It is a beautiful house","Toulouse","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Single room","www.v.com","$110", "It is a beautiful house", "Brest","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.one, "Single room","www.v.com","$210", "It is a beautiful house","Marseille","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.two, "Double room","www.v.com","$100", "It is a beautiful house","Grenoble","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.three, "Double room","www.v.com","$90", "It is a beautiful house","Tours","⭐⭐⭐⭐⭐"));
+        recyclerview_lists.add(new recyclerview_list(R.drawable.four, "Single room","www.v.com","$300", "It is a beautiful house","Limonges","⭐⭐⭐⭐⭐"));
 
         filteredRoomList = new ArrayList<>(recyclerview_lists);
 
@@ -77,13 +77,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.R
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-
         roomAdapter = new RecyclerAdapter(this);
         roomAdapter.setRoomItemList(filteredRoomList);
         recyclerView.setAdapter(roomAdapter);
 
         searchEditText = findViewById(R.id.searchEditText);
-
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }

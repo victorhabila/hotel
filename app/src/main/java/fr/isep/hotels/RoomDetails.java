@@ -13,6 +13,13 @@ public class RoomDetails extends AppCompatActivity {
 
     private recyclerview_list room;
 
+    private TextView price;
+    private TextView description;
+    private TextView Location;
+
+    private TextView rating;
+    private TextView bookingSite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +40,24 @@ public class RoomDetails extends AppCompatActivity {
     {
         title.setText(room.getAd_title());
         shoeImageView.setImageResource(room.getPhoto_one());
+        price.setText(room.getPrice());
+        description.setText(room.getDescription());
+        Location.setText(room.getLocation());
+        rating.setText(room.getRating());
+
     }
 
     private void initializeVariables() {
 
-
-        shoeImageView = findViewById(R.id.eachRoom);
         title = findViewById(R.id.roomTitle);
+        shoeImageView = findViewById(R.id.eachRoom);
+        price = findViewById(R.id.roomPrice);
+        description = findViewById(R.id.roomDescription);
+        Location = findViewById(R.id.roomLocation);
+        rating = findViewById(R.id.roomRating);
+
+
+
 
 
     }
